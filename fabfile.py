@@ -14,10 +14,9 @@ def test():
 @task
 def build_static():
     run(
-        "export PRODUCTION='1';" +
         'cd /home/vinograd19/shaya/src/frontend/;' +
         'npm install;' +
-        'gulp;' +
+        'gulp build;' +
         ''
     )
 
