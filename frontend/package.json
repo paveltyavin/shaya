@@ -1,0 +1,66 @@
+{
+  "name": "frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^3.3.5",
+    "highcharts-browserify": "^2.0.2",
+    "jquery": "^2.1.4",
+    "underscore": "^1.8.3"
+  },
+  "browser": {
+    "config": "./src/config.js",
+    "moment-ru": "./node_modules/moment/locale/ru.js"
+  },
+  "browserify": {
+    "transform": [
+      "coffeeify",
+      "browserify-shim"
+    ],
+    "extensions": [
+      ".coffee",
+      ".hbs"
+    ]
+  },
+  "browserify-shim": {
+    "jquery": "$",
+    "bootstrap": {
+      "depends": [
+        "jquery:jQuery",
+        "config"
+      ]
+    },
+    "highcharts-browserify": {
+      "depends": [
+        "jquery:jQuery",
+        "config"
+      ]
+    }
+  },
+  "devDependencies": {
+    "browserify": "^10.2.4",
+    "browserify-shim": "^3.8.10",
+    "coffeeify": "^1.1.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-less": "^3.0.3",
+    "gulp-livereload": "^3.8.0",
+    "gulp-log": "0.0.0",
+    "gulp-minify-css": "^1.2.1",
+    "gulp-replace": "^0.5.4",
+    "gulp-size": "^1.2.1",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.5",
+    "require-dir": "^0.3.0",
+    "stream-combiner2": "^1.0.2",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.3"
+  }
+}
