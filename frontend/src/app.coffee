@@ -1,51 +1,43 @@
-$ = require 'jquery'
-moment = require 'moment'
-require 'moment-ru'
 require 'config'
 require 'bootstrap'
-HighCharts = require 'highcharts-browserify'
-_ = require 'underscore'
+require './settings'
+marionette = require 'backbone.marionette'
+backbone = require 'backbone'
 
-moment.locale 'ru'
+ChartView = require './chart'
+follower_module = require './follower'
 
-Highcharts.setOptions
-  lang:
-    loading: 'Загрузка...'
-    months: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
-    weekdays: ['Воскресенье', 'Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота']
-    shortMonths: ['Янв', 'Фев', 'Март', 'Апр', 'Май', 'Июнь', 'Июль', 'Авг', 'Сент', 'Окт', 'Нояб', 'Дек']
-    exportButtonTitle: "Экспорт"
-    printButtonTitle: "Печать"
-    rangeSelectorFrom: "С"
-    rangeSelectorTo: "По"
-    rangeSelectorZoom: "Период"
-    downloadPNG: 'Скачать PNG'
-    downloadJPEG: 'Скачать JPEG'
-    downloadPDF: 'Скачать PDF'
-    downloadSVG: 'Скачать SVG'
-    printChart: 'Напечатать график'
+class RootView extends marionette.LayoutView
+  el: 'body'
+  regions:
+    region_main: '#region_main'
+    region_chart: '#region_chart'
 
-$ ->
-  $.getJSON '/api/follower/', (response) ->
-    data = _.map(response, (x) -> [moment(x['created']).valueOf(), x['value']])
-    console.log(data)
-    new Highcharts.Chart
-      title:
-        text: 'Количество подписчиков'
-      chart:
-        renderTo: $('#follower-chart')[0]
-        height: 400
-      xAxis:
-        type: 'datetime'
-        labels:
-            format: '{value:%d.%m}'
-            rotation: -45
-            align: 'right'
-      yAxis:
-        title:
-          text: 'Количество подписчиков'
-      series: [{
-        type: 'area',
-        name: 'Количество подписчиков',
-        data: data
-      }]
+class TestView extends marionette.ItemView
+  template: -> return 'test'
+
+class Router extends marionette.AppRouter
+  initialize: (app) ->
+    @app = app
+
+  routes:
+    '': 'followerList'
+    ':id/': 'followerDetail'
+
+  followerList: ->
+    @app.rootView.region_main.show(new follower_module.FollowerListLayout)
+  followerDetail: (id) ->
+    @app.rootView.region_main.show(new follower_module.FollowerDetailLayout(id: id))
+
+app = new marionette.Application()
+app.rootView = new RootView
+
+app.on 'before:start', ->
+  new Router(app)
+
+app.on 'start', ->
+  backbone.history.start pushState: true
+  app.rootView.region_chart.show(new ChartView)
+
+window.addEventListener 'load', ->
+  app.start()
