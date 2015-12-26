@@ -5,7 +5,8 @@ marionette = require 'backbone.marionette'
 backbone = require 'backbone'
 
 ChartView = require './chart'
-follower_module = require './follower'
+FollowerDetailLayout = require './follower_detail'
+FollowerListLayout = require './follower_list'
 
 class RootView extends marionette.LayoutView
   el: 'body'
@@ -25,9 +26,9 @@ class Router extends marionette.AppRouter
     ':id/': 'followerDetail'
 
   followerList: ->
-    @app.rootView.region_main.show(new follower_module.FollowerListLayout)
+    @app.rootView.region_main.show(new FollowerListLayout)
   followerDetail: (id) ->
-    @app.rootView.region_main.show(new follower_module.FollowerDetailLayout(id: id))
+    @app.rootView.region_main.show(new FollowerDetailLayout(id: id))
 
 app = new marionette.Application()
 app.rootView = new RootView

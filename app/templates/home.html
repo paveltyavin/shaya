@@ -8,8 +8,33 @@
     <title></title>
 </head>
 <body>
-<div id="region_chart"></div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Подписчики</a>
+                </li>
+                <li>
+                    <a href="#">График</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
 <div id="region_main"></div>
+<div id="region_chart"></div>
 
 <script src="{% static 'vendor.js' %}"></script>
 <script src="{% static 'app.js' %}"></script>

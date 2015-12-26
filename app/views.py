@@ -30,6 +30,7 @@ class FollowerListSerializer(serializers.ModelSerializer):
             'username',
             'is_active',
             'inactive_date',
+            'profile_picture',
         ]
 
 
@@ -52,6 +53,7 @@ class FollowerDetailSerializer(serializers.ModelSerializer):
             'username',
             'is_active',
             'inactive_date',
+            'profile_picture',
             'followerpresence_set',
         ]
 
