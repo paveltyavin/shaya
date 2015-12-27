@@ -65,6 +65,7 @@
     "gulp-size": "^1.2.1",
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.5",
+    "handlebars": "^4.0.5",
     "require-dir": "^0.3.0",
     "stream-combiner2": "^1.0.2",
     "vinyl-buffer": "^1.0.0",
