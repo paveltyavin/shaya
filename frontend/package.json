@@ -10,7 +10,8 @@
   "license": "ISC",
   "browser": {
     "config": "./src/config.js",
-    "moment-ru": "./node_modules/moment/locale/ru.js"
+    "moment-ru": "./node_modules/moment/locale/ru.js",
+    "jquery.scrolling": "./node_modules/jquery.scrolling/jquery.scrolling.js"
   },
   "browserify": {
     "transform": [
@@ -41,10 +42,12 @@
   "dependencies": {
     "backbone": "^1.2.3",
     "backbone.marionette": "^2.4.4",
+    "backbone.modelbinder": "^1.1.0",
     "bootstrap": "^3.3.5",
     "hbsfy": "^2.4.1",
     "highcharts-browserify": "^2.0.2",
     "jquery": "^2.1.4",
+    "jquery.scrolling": "^0.1.20150317",
     "moment": "^2.10.6",
     "underscore": "^1.8.3"
   },

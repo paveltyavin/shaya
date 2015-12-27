@@ -29,6 +29,9 @@ class Command(BaseCommand):
                         'is_active': True,
                     },
                 )
+                if not follower.is_active:
+                    follower.is_active = True
+                    follower.save()
                 follower_id_set.add(follower_id)
                 FollowerPresence.objects.create(
                     follower=follower,
