@@ -13,7 +13,7 @@ logger = logging.getLogger('command')
 class Command(BaseCommand):
     def get_followers(self):
         follower_id_set = set([])
-        url = 'https://api.instagram.com/v1/users/self/follows?access_token={}'.format(settings.INSTAGRAM_ACCESS_TOKEN)
+        url = 'https://api.instagram.com/v1/users/self/followed-by?access_token={}'.format(settings.INSTAGRAM_ACCESS_TOKEN)
         while url:
             r = requests.get(url)
             data = json.loads(r.text)
