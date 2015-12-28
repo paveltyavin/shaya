@@ -5,7 +5,9 @@ from django.conf import settings
 from django.utils.timezone import now
 import requests
 import json
+import logging
 from app.models import ChartPoint, Follower, FollowerPresence
+logger = logging.getLogger('command')
 
 
 class Command(BaseCommand):
@@ -42,20 +44,22 @@ class Command(BaseCommand):
             url = pagination.get('next_url')
 
         other_follower_qs = Follower.objects.exclude(id__in=follower_id_set)
-
-        other_follower_qs.filter(
-            is_active=True,
-        ).update(
-            is_active=False,
-            inactive_date=now(),
-        )
-
-        for follower in other_follower_qs:
-            FollowerPresence.objects.create(
-                follower=follower,
-                created=now(),
+        if other_follower_qs.exists():
+            other_follower_qs.filter(
+                is_active=True,
+            ).update(
                 is_active=False,
+                inactive_date=now(),
             )
+
+            for follower in other_follower_qs:
+                FollowerPresence.objects.create(
+                    follower=follower,
+                    created=now(),
+                    is_active=False,
+                )
+        else:
+            logger.log(logging.DEBUG, 'Отписчики не найдены')
 
     def get_value(self):
         url = 'https://api.instagram.com/v1/users/{}'.format(settings.INSTAGRAM_USER_ID)
