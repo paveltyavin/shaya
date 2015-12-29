@@ -6,6 +6,6 @@
         <img src="{{profile_picture}}" alt="">
     </div>
     {{#if inactive_date}}
-        {{inactive_date}}
+        {{moment inactive_date 'DD MMMM YYYY'}}
     {{/if}}
 </div>

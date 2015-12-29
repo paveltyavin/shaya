@@ -1,13 +1,7 @@
-require 'config'
+require './settings/init'
 require 'bootstrap'
-require './settings'
-marionette = require 'backbone.marionette'
 backbone = require 'backbone'
-
-ChartView = require './chart'
-FollowerDetailLayout = require './follower/detail/layout'
-FollowerListLayout = require './follower/list/layout'
-HomeLayout = require './home/layout'
+marionette = require 'backbone.marionette'
 
 class RootView extends marionette.LayoutView
   el: 'body'
@@ -17,7 +11,7 @@ class RootView extends marionette.LayoutView
     'click #navbar a': 'onClickLink'
 
   addLinkClass: (link) =>
-    $a = @$("a[href='#{link}']")
+    $a = @$("a[data-link='#{link}']")
     if $a.length > 0
       $li = $a.parent()
       $li.siblings().removeClass 'active'
@@ -41,18 +35,22 @@ class Router extends marionette.AppRouter
     'follower/:id/': 'followerDetail'
 
   home: ->
-    @app.rootView.region_main.show(new HomeLayout)
-    @app.rootView.addLinkClass('/')
+    View = require './home/layout'
+    @app.rootView.region_main.show(new View)
+    @app.rootView.addLinkClass('home')
 
   followerList: ->
-    @app.rootView.region_main.show(new FollowerListLayout)
-    @app.rootView.addLinkClass('/follower/')
+    View = require './follower/list/layout'
+    @app.rootView.region_main.show(new View)
+    @app.rootView.addLinkClass('follower')
   followerDetail: (id) ->
-    @app.rootView.region_main.show(new FollowerDetailLayout(id: id))
-    @app.rootView.addLinkClass('/follower/')
+    View = require './follower/detail/layout'
+    @app.rootView.region_main.show(new View(id: id))
+    @app.rootView.addLinkClass('follower')
   chart: ->
-    @app.rootView.region_main.show(new ChartView)
-    @app.rootView.addLinkClass('/chart/')
+    View = require './chart'
+    @app.rootView.region_main.show(new View)
+    @app.rootView.addLinkClass('chart')
 
 
 app = new marionette.Application()

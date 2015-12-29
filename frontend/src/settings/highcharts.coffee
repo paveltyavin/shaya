@@ -16,7 +16,3 @@ highcharts.setOptions
     downloadPDF: 'Скачать PDF'
     downloadSVG: 'Скачать SVG'
     printChart: 'Напечатать график'
-
-moment = require 'moment'
-require 'moment-ru'
-moment.locale 'ru'

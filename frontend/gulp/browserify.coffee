@@ -20,7 +20,7 @@ w = watchify browserify
   extensions: ['.coffee', '.hbs']
   cache: {}
   packageCache: {}
-#  debug: true
+  debug: true
   fullPaths: true
   insertGlobals: true
 

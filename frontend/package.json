@@ -9,8 +9,6 @@
   "author": "",
   "license": "ISC",
   "browser": {
-    "config": "./src/config.js",
-    "moment-ru": "./node_modules/moment/locale/ru.js",
     "jquery.scrolling": "./node_modules/jquery.scrolling/jquery.scrolling.js"
   },
   "browserify": {
@@ -28,14 +26,12 @@
     "jquery": "$",
     "bootstrap": {
       "depends": [
-        "jquery:jQuery",
-        "config"
+        "jquery:jQuery"
       ]
     },
     "highcharts-browserify": {
       "depends": [
-        "jquery:jQuery",
-        "config"
+        "jquery:jQuery"
       ]
     }
   },
